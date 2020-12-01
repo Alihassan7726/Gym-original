@@ -16,7 +16,7 @@ import pandas as pd
 import numpy as np
 
 app = Flask(__name__)
-filename = 'Model_GYM.pkl'
+filename = 'Ali-gym-diet.pkl'
 model = pickle.load(open(filename, 'rb'))
 
 @app.route('/')
