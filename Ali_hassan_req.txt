@@ -70,6 +70,7 @@ glue-vispy-viewers==0.12.2
 glueviz @ file:///C:/ci/glueviz_1600379030367/work
 gmpy2==2.0.8
 greenlet @ file:///C:/ci/greenlet_1600885448389/work
+gunicorn==20.0.4
 h5py==2.10.0
 HeapDict==1.0.1
 html5lib @ file:///tmp/build/80754af9/html5lib_1593446221756/work
