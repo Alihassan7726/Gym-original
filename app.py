@@ -1,37 +1,38 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Dec  1 14:52:18 2020
-
-@author: Ali
+Created on Sat Jun  8 17:06:01 2019
+@author: prithvi
 """
-
-
-import pickle
+import flask
+from flask import Flask, request , jsonify, render_template
+#import jinja2
 import numpy as np
-from flask import Flask, request
+import pandas as pd
+import pickle
 
-model = None
+from flask import Flask, request,jsonify,render_template
+import pickle
+import pandas as pd
+import numpy as np
+
 app = Flask(__name__)
+filename = 'Model_GYM.pkl'
+model = pickle.load(open(filename, 'rb'))
 
-def load_model():
-    global model
-    # model variable refers to the global variable
-    with open('Ali-gym-diet.pkl', 'rb') as f:
-        model = pickle.load(f)
-        
 @app.route('/')
-def home_endpoint():
+def man():
     return render_template('home.html')
 
-@app.route('/predict', methods=['POST'])
-def get_prediction():
-    if request.method == 'POST':
-        data = request.get_json()  # Get data posted as a json
-        data = np.array(data)[np.newaxis, :]  # converts shape from (3,) to (1, 3)
-        prediction = model.predict(data)  # runs globally loaded model on the data
-    return render_template('after.html',data=prediction)
 
-if __name__ == '__main__':
-    load_model()  # load model at the beginning once only
-    app.run(host='0.0.0.0', port=5000)
-    
+@app.route('/predict', methods=['POST'])
+def home():
+    data1 = request.form['a']
+    data2 = request.form['b']
+    data3 = request.form['c']
+    arr = np.array([[data1, data2, data3]])
+    pred = model.predict(arr)
+    return render_template('after.html',data=pred)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
